@@ -30,6 +30,7 @@ export const onEndPlacement = (): AC => async (dispatch, getState) => {
   } = getState();
   if (!startCoords || !endCoords) return;
   if (!isValidPlace) {
+    dispatch(gameSlice.actions.setValidity(true));
     dispatch(gameSlice.actions.endPlacement());
     return;
   }
@@ -74,5 +75,8 @@ export const onHoverWhilePlacing =
 
 export const onLeaveField = (): AC => (dispatch, getState) => {
   const state = getState();
-  if (state.game.isPlacing) dispatch(gameSlice.actions.endPlacement());
+  if (state.game.isPlacing) {
+    dispatch(gameSlice.actions.setValidity(true));
+    dispatch(gameSlice.actions.endPlacement());
+  }
 };
