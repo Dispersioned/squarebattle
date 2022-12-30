@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { BlockPlacer } from 'component/block-placer';
 import { Cell } from 'component/cell';
 import { useEffect, useLayoutEffect, useRef } from 'react';
+import { getFieldSize } from 'shared/helpers/getFieldSize';
 import { useTypeSelector } from 'shared/hooks/redux';
 import { useAction } from 'shared/hooks/useAction';
 import { useFlatField } from 'shared/hooks/useFlatField';
@@ -14,10 +15,8 @@ export function Play() {
     isPlacing,
     newZone: { startCoords, endCoords },
   } = useTypeSelector((state) => state.game);
-  const rows = field.length;
-  const cols = field[0].length;
-
   const flatField = useFlatField(field);
+  const { rows, cols } = getFieldSize(field);
 
   const { onLeaveField, onHoverWhilePlacing, onStartPlacement, onEndPlacement } = useAction();
 

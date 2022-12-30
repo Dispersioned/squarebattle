@@ -1,19 +1,27 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
-import { Coords } from 'shared/types';
+import { Block, Coords, Player } from 'shared/types';
 
 interface InitialState {
   field: number[][];
   isPlacing: boolean;
+  player: Player;
+  blocks: Block[];
   newZone: {
     startCoords: Coords | null;
     endCoords: Coords | null;
   };
 }
 
+const field = createField(30, 20);
+const blocks = createDefaultBlocks(field);
+
 const initialState: InitialState = {
-  field: createField(30, 20),
+  field,
   isPlacing: false,
+  player: 'first',
+  blocks,
   newZone: {
     startCoords: null,
     endCoords: null,
