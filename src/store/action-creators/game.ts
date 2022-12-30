@@ -1,39 +1,42 @@
 import React from 'react';
 import { getCellCoords } from 'shared/helpers/getCellCoords';
-import { useTypeSelector } from 'shared/hooks/redux';
 import { AppDispatch, AppStore } from 'store';
 import { gameSlice } from 'store/slices/gameSlice';
 
-export const onStartPlacement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (dispatch: AppDispatch) => {
-  const coords = getCellCoords(e);
-  if (!coords) return;
-  dispatch(gameSlice.actions.startPlacement(coords));
-};
+import { AC } from '.';
 
-export const onEndPlacement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (dispatch: AppDispatch) => {
-  const coords = getCellCoords(e);
-  if (!coords) return;
-  dispatch(gameSlice.actions.endPlacement(coords));
-};
+export const onStartPlacement =
+  (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
+  (dispatch) => {
+    const coords = getCellCoords(e);
+    if (!coords) return;
+    dispatch(gameSlice.actions.startPlacement(coords));
+  };
+
+export const onEndPlacement =
+  (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
+  (dispatch) => {
+    const coords = getCellCoords(e);
+    if (!coords) return;
+    dispatch(gameSlice.actions.endPlacement(coords));
+  };
 
 export const onHoverWhilePlacing =
-  (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (dispatch: AppDispatch, getState: AppStore['getState']) => {
+  (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
+  (dispatch, getState) => {
     const coords = getCellCoords(e);
     if (!coords) return;
 
-    const {
-      game: {
-        newZone: { endCoords },
-      },
-    } = getState();
-    if (endCoords) {
-      if (coords.x === endCoords.x && coords.y === endCoords.y) return;
-      console.log('coords', coords);
-    }
+    const state = getState();
+    if (!state.game.isPlacing) return;
+
+    const endCoords = state.game.newZone.endCoords;
+    if (endCoords && coords.x === endCoords.x && coords.y === endCoords.y) return;
 
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
 
-export const onLeaveField = () => (dispatch: AppDispatch) => {
-  dispatch(gameSlice.actions.onLeaveField());
+export const onLeaveField = (): AC => (dispatch, getState) => {
+  const state = getState();
+  if (state.game.isPlacing) dispatch(gameSlice.actions.onLeaveField());
 };

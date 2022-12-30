@@ -1,5 +1,7 @@
 import { Typography } from '@mui/material';
+import { BlockPlacer } from 'component/block-placer';
 import { Cell } from 'component/cell';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useTypeSelector } from 'shared/hooks/redux';
 import { useAction } from 'shared/hooks/useAction';
 import { useFlatField } from 'shared/hooks/useFlatField';
@@ -20,11 +22,11 @@ export function Play() {
   const { onLeaveField, onHoverWhilePlacing, onStartPlacement, onEndPlacement } = useAction();
 
   const onMouseLeaveField = () => {
-    if (isPlacing) onLeaveField();
+    onLeaveField();
   };
 
   const onHover = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (isPlacing) onHoverWhilePlacing(e);
+    onHoverWhilePlacing(e);
   };
 
   return (
@@ -38,6 +40,7 @@ export function Play() {
         onMouseUp={onEndPlacement}
         onMouseMove={onHover}
       >
+        {isPlacing && <BlockPlacer />}
         {flatField.map((cell) => (
           <Cell key={cell.key} coords={cell.coords} />
         ))}

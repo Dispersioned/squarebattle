@@ -1,4 +1,5 @@
 import { styled } from '@mui/material';
+import { CELL_SIZE_PX } from 'shared/config';
 
 export const Container = styled('div')`
   display: flex;
@@ -14,8 +15,9 @@ export const FieldContainer = styled('div', { shouldForwardProp: (p) => p !== 'r
   cols: number;
   rows: number;
 }>`
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(${(props) => props.cols}, 20px);
-  grid-template-rows: repeat(${(props) => props.rows}, 20px);
+  grid-template-columns: repeat(${(props) => props.cols}, ${CELL_SIZE_PX});
+  grid-template-rows: repeat(${(props) => props.rows}, ${CELL_SIZE_PX});
   border: 1px solid #bbb;
 `;

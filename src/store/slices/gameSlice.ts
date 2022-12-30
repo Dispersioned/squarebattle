@@ -27,6 +27,7 @@ export const gameSlice = createSlice({
     startPlacement(state, action: PayloadAction<Coords>) {
       state.isPlacing = true;
       state.newZone.startCoords = action.payload;
+      state.newZone.endCoords = action.payload;
     },
     onLeaveField(state) {
       state.isPlacing = false;
@@ -38,9 +39,8 @@ export const gameSlice = createSlice({
     },
     endPlacement(state, action: PayloadAction<Coords>) {
       state.isPlacing = false;
-      // state.newZone.endCoords = action.payload;
-      // logic...
-      // state.newZone.startCoords = null;
+      state.newZone.startCoords = null;
+      state.newZone.endCoords = null;
     },
   },
 });
