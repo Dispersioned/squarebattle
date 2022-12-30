@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCellCoords } from 'shared/helpers/getCellCoords';
 import { getPosition } from 'shared/helpers/getPosition';
-import { validateOverlap } from 'shared/helpers/validateTurn';
+import { validate } from 'shared/helpers/validate';
 import { gameSlice } from 'store/slices/gameSlice';
 
 import { AC } from '.';
@@ -15,12 +15,12 @@ export const onStartPlacement =
     dispatch(gameSlice.actions.startPlacement(coords));
 
     const {
-      game: { field },
+      game: { field, player },
     } = getState();
 
     // validate first 1x1 block
     const { indexes } = getPosition(coords, coords);
-    if (!validateOverlap(field, indexes)) {
+    if (!validate(field, indexes, player)) {
       dispatch(gameSlice.actions.setValidity(false));
     } else {
       dispatch(gameSlice.actions.setValidity(true));
@@ -69,13 +69,14 @@ export const onHoverWhilePlacing =
       game: {
         field,
         isPlacing,
+        player,
         newZone: { startCoords, endCoords },
       },
     } = getState();
     if (!isPlacing || !startCoords || !endCoords) return;
 
     const { indexes } = getPosition(startCoords, coords);
-    if (!validateOverlap(field, indexes)) {
+    if (!validate(field, indexes, player)) {
       dispatch(gameSlice.actions.setValidity(false));
     } else {
       dispatch(gameSlice.actions.setValidity(true));

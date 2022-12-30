@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { createDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
+import { initDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
 import { getPosition } from 'shared/helpers/getPosition';
 import { Block, Coords, Player } from 'shared/types';
@@ -17,10 +17,10 @@ interface InitialState {
 }
 
 const field = createField(30, 20);
-const blocks = createDefaultBlocks(field);
+const { blocks, initedField } = initDefaultBlocks(field);
 
 const initialState: InitialState = {
-  field,
+  field: initedField,
   isPlacing: false,
   isValidPlace: false,
   player: 'first',

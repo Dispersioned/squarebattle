@@ -1,10 +1,12 @@
 import { Block, Field } from 'shared/types';
 
 import { getFieldSize } from './getFieldSize';
+import { getPosition } from './getPosition';
 
-export function createDefaultBlocks(field: Field) {
+export function initDefaultBlocks(field: Field) {
   const blocks: Block[] = [];
   const { rows, cols } = getFieldSize(field);
+  const initedField: Field = JSON.parse(JSON.stringify(field));
 
   blocks.push({
     player: 'first',
@@ -30,5 +32,17 @@ export function createDefaultBlocks(field: Field) {
     },
   });
 
-  return blocks;
+  blocks.forEach((block) => {
+    const {
+      indexes: { lx, rx, ly, ry },
+    } = getPosition(block.start, block.end);
+
+    for (let i = lx; i <= rx; i++) {
+      for (let j = ly; j <= ry; j++) {
+        initedField[j][i] = block.player === 'first' ? 1 : 2;
+      }
+    }
+  });
+
+  return { blocks, initedField };
 }
