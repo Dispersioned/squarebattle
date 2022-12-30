@@ -16,6 +16,13 @@ export const onEndPlacement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) 
   dispatch(gameSlice.actions.endPlacement(coords));
 };
 
+export const onHoverWhilePlacing =
+  (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => async (dispatch: AppDispatch) => {
+    const coords = getCellCoords(e);
+    if (!coords) return;
+    dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
+  };
+
 export const onLeaveField = () => async (dispatch: AppDispatch) => {
   dispatch(gameSlice.actions.onLeaveField());
 };

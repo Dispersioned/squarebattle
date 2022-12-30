@@ -7,7 +7,11 @@ import { useAction } from 'shared/hooks/useAction';
 import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const { field, isPlacing } = useTypeSelector((state) => state.game);
+  const {
+    field,
+    isPlacing,
+    newZone: { startCoords, endCoords },
+  } = useTypeSelector((state) => state.game);
   const rows = field.length;
   const cols = field[0].length;
 
