@@ -8,10 +8,23 @@ import { AC } from '.';
 
 export const onStartPlacement =
   (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
-  (dispatch) => {
+  (dispatch, getState) => {
     const coords = getCellCoords(e);
     if (!coords) return;
+
     dispatch(gameSlice.actions.startPlacement(coords));
+
+    const {
+      game: { field },
+    } = getState();
+
+    // validate first 1x1 block
+    const { indexes } = getPosition(coords, coords);
+    if (!validateOverlap(field, indexes)) {
+      dispatch(gameSlice.actions.setValidity(false));
+    } else {
+      dispatch(gameSlice.actions.setValidity(true));
+    }
   };
 
 export const onCancelPlacement = (): AC => (dispatch, getState) => {

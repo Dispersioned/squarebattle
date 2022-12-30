@@ -29,7 +29,7 @@ export function Play() {
   return (
     <Container>
       <Typography>Press ESC to cancel placement</Typography>
-      <Typography>Player turn: {player}</Typography>
+      <Typography>Player turn: {player === 'first' ? 'red' : 'blue'}</Typography>
       <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
       <Typography>Is valid? {isValidPlace ? 'true' : 'false'}</Typography>
       <FieldContainer
