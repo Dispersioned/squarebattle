@@ -6,6 +6,7 @@ import { Block, Coords, Player } from 'shared/types';
 interface InitialState {
   field: number[][];
   isPlacing: boolean;
+  isValidPlace: boolean;
   player: Player;
   blocks: Block[];
   newZone: {
@@ -20,6 +21,7 @@ const blocks = createDefaultBlocks(field);
 const initialState: InitialState = {
   field,
   isPlacing: false,
+  isValidPlace: false,
   player: 'first',
   blocks,
   newZone: {
