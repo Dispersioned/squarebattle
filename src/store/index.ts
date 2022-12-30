@@ -1,6 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({});
+import { game } from './slices/gameSlice';
+
+const rootReducer = combineReducers({
+  game,
+});
 
 export const setupStore = () => {
   return configureStore({
@@ -8,6 +12,8 @@ export const setupStore = () => {
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
   });
 };
+
+export const store = setupStore();
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
