@@ -17,14 +17,6 @@ export function Play() {
 
   const { onLeaveField, onHoverWhilePlacing, onStartPlacement, onEndPlacement, onCancelPlacement } = useAction();
 
-  const onMouseLeaveField = () => {
-    onLeaveField();
-  };
-
-  const onHover = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    onHoverWhilePlacing(e);
-  };
-
   useEffect(() => {
     const escapeListener = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onCancelPlacement();
@@ -41,10 +33,10 @@ export function Play() {
       <FieldContainer
         rows={rows}
         cols={cols}
-        onMouseLeave={onMouseLeaveField}
+        onMouseLeave={onLeaveField}
         onMouseDown={onStartPlacement}
         onMouseUp={onEndPlacement}
-        onMouseMove={onHover}
+        onMouseMove={onHoverWhilePlacing}
       >
         <PlacedBlocks />
         {isPlacing && <BlockPlacer />}
