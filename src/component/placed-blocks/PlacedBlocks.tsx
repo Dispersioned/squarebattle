@@ -25,7 +25,7 @@ export function PlacedBlocks() {
       {blockData.map((data, i) => {
         const { left, top, width, height } = data.style;
 
-        const color = data.player === 'first' ? 'red' : 'blue';
+        const color = data.player === 'first' ? '#de2a16' : '#364acf';
 
         return (
           <div
