@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material';
-import { CELL_SIZE } from 'shared/config';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 

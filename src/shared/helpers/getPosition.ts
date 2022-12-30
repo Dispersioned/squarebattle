@@ -12,10 +12,6 @@ export function getPosition(startCoords: Coords, endCoords: Coords) {
       width: (rx - lx + 1) * CELL_SIZE,
       height: (ry - ly + 1) * CELL_SIZE,
     },
-    lx,
-    rx,
-    ly,
-    ry,
     square: (rx - lx + 1) * (ry - ly + 1),
   };
 }

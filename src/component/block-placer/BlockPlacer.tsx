@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material';
-import { CELL_SIZE } from 'shared/config';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 
@@ -15,10 +14,6 @@ export function BlockPlacer() {
 
   const {
     style: { left, top, width, height },
-    lx,
-    rx,
-    ly,
-    ry,
     square,
   } = getPosition(startCoords, endCoords);
 
