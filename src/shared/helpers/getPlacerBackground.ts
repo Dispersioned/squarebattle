@@ -1,4 +1,4 @@
-import { Field, Indexes, Player } from 'shared/types';
+import { Player } from 'shared/types';
 
 export function getPlacerBackground(player: Player, valid: boolean) {
   if (!valid) return 'rgba(0,0,0,0.1)';

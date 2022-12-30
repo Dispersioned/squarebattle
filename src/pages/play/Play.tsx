@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
 import { BlockPlacer } from 'component/block-placer';
 import { Cell } from 'component/cell';
+import { Info } from 'component/info';
 import { PlacedBlocks } from 'component/placed-blocks';
 import { useEffect } from 'react';
 import { getFieldSize } from 'shared/helpers/getFieldSize';
@@ -11,7 +11,7 @@ import { useFlatField } from 'shared/hooks/useFlatField';
 import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const { field, isPlacing, isValidPlace, player } = useTypeSelector((state) => state.game);
+  const { field, isPlacing } = useTypeSelector((state) => state.game);
 
   const flatField = useFlatField(field);
   const { rows, cols } = getFieldSize(field);
@@ -24,14 +24,11 @@ export function Play() {
     };
     document.addEventListener('keydown', escapeListener);
     return () => document.removeEventListener('keydown', escapeListener);
-  }, []);
+  }, [onCancelPlacement]);
 
   return (
     <Container>
-      <Typography>Press ESC to cancel placement</Typography>
-      <Typography>Player turn: {player === 'first' ? 'red' : 'blue'}</Typography>
-      <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
-      <Typography>Is valid? {isValidPlace ? 'true' : 'false'}</Typography>
+      <Info />
       <FieldContainer
         rows={rows}
         cols={cols}

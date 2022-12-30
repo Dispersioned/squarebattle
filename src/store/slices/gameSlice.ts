@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { createDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
-import { getFieldSize } from 'shared/helpers/getFieldSize';
 import { getPosition } from 'shared/helpers/getPosition';
 import { Block, Coords, Player } from 'shared/types';
 

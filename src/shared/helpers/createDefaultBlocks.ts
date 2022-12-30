@@ -13,16 +13,16 @@ export function createDefaultBlocks(field: Field) {
       y: 0,
     },
     end: {
-      x: 0,
-      y: 0,
+      x: 1,
+      y: 1,
     },
   });
 
   blocks.push({
     player: 'second',
     start: {
-      x: cols - 1,
-      y: rows - 1,
+      x: cols - 2,
+      y: rows - 2,
     },
     end: {
       x: cols - 1,

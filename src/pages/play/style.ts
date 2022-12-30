@@ -7,6 +7,7 @@ export const Container = styled('div')`
   height: 100vh;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   /* disable select for correct zone placement */
   user-select: none;
 `;
