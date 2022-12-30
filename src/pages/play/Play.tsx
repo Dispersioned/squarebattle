@@ -10,11 +10,7 @@ import { useFlatField } from 'shared/hooks/useFlatField';
 import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const {
-    field,
-    isPlacing,
-    newZone: { startCoords, endCoords },
-  } = useTypeSelector((state) => state.game);
+  const { field, isPlacing, player } = useTypeSelector((state) => state.game);
   const flatField = useFlatField(field);
   const { rows, cols } = getFieldSize(field);
 
@@ -30,6 +26,7 @@ export function Play() {
 
   return (
     <Container>
+      <Typography>Player turn: {player}</Typography>
       <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
       <FieldContainer
         rows={rows}

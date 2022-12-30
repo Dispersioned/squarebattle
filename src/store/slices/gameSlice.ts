@@ -49,6 +49,7 @@ export const gameSlice = createSlice({
       state.isPlacing = false;
       state.newZone.startCoords = null;
       state.newZone.endCoords = null;
+      state.player = state.player === 'first' ? 'second' : 'first';
     },
   },
 });
