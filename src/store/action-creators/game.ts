@@ -15,10 +15,13 @@ export const onStartPlacement =
 
 export const onEndPlacement =
   (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
-  (dispatch) => {
+  (dispatch, getState) => {
     const coords = getCellCoords(e);
     if (!coords) return;
+
+    const state = getState();
     dispatch(gameSlice.actions.endPlacement(coords));
+    dispatch(gameSlice.actions.changePlayer(state.game.player === 'first' ? 'second' : 'first'));
   };
 
 export const onHoverWhilePlacing =
