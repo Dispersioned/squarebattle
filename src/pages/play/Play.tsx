@@ -11,7 +11,8 @@ import { useFlatField } from 'shared/hooks/useFlatField';
 import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const { field, isPlacing, player } = useTypeSelector((state) => state.game);
+  const { field, isPlacing, isValidPlace, player } = useTypeSelector((state) => state.game);
+
   const flatField = useFlatField(field);
   const { rows, cols } = getFieldSize(field);
 
@@ -30,6 +31,7 @@ export function Play() {
       <Typography>Press ESC to cancel placement</Typography>
       <Typography>Player turn: {player}</Typography>
       <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
+      <Typography>Is valid? {isValidPlace ? 'true' : 'false'}</Typography>
       <FieldContainer
         rows={rows}
         cols={cols}
@@ -41,7 +43,7 @@ export function Play() {
         <PlacedBlocks />
         {isPlacing && <BlockPlacer />}
         {flatField.map((cell) => (
-          <Cell key={cell.key} coords={cell.coords} />
+          <Cell key={cell.key} cell={cell} />
         ))}
       </FieldContainer>
     </Container>

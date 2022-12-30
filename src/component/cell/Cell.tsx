@@ -1,14 +1,14 @@
 import { memo } from 'react';
-import { Coords } from 'shared/types';
+import { Coords, ICell } from 'shared/types';
 
 import { CellContainer } from './style';
 
 type CellProps = {
-  coords: Coords;
+  cell: ICell;
 };
 
-function Cell({ coords }: CellProps) {
-  return <CellContainer data-x={coords.x} data-y={coords.y} />;
+function Cell({ cell }: CellProps) {
+  return <CellContainer data-x={cell.coords.x} data-y={cell.coords.y} />;
 }
 
 export default memo(Cell);

@@ -5,15 +5,21 @@ export type Coords = {
   x: number;
   y: number;
 };
-export type Cell = {
+export type ICell = {
   value: number;
   key: string;
   coords: Coords;
 };
 export type Field = number[][];
-export type FlatField = Cell[];
+export type FlatField = ICell[];
 export type Block = {
   player: Player;
   start: Coords;
   end: Coords;
+};
+export type Indexes = {
+  lx: number;
+  rx: number;
+  ly: number;
+  ry: number;
 };

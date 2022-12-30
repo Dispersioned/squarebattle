@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { createDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
+import { getFieldSize } from 'shared/helpers/getFieldSize';
+import { getPosition } from 'shared/helpers/getPosition';
 import { Block, Coords, Player } from 'shared/types';
 
 interface InitialState {
@@ -49,9 +51,22 @@ export const gameSlice = createSlice({
     },
     createBlock(state, action: PayloadAction<Block>) {
       state.blocks.push(action.payload);
+
+      const {
+        indexes: { lx, rx, ly, ry },
+      } = getPosition(action.payload.start, action.payload.end);
+
+      for (let i = lx; i <= rx; i++) {
+        for (let j = ly; j <= ry; j++) {
+          state.field[j][i] = action.payload.player === 'first' ? 1 : 2;
+        }
+      }
     },
     changePlayer(state, action: PayloadAction<Player>) {
       state.player = action.payload;
+    },
+    setValidity(state, action: PayloadAction<boolean>) {
+      state.isValidPlace = action.payload;
     },
   },
 });

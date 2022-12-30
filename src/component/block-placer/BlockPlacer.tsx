@@ -1,11 +1,15 @@
 import { Typography } from '@mui/material';
 import { COLORS } from 'shared/config';
+import { getPlacerBackground } from 'shared/helpers/getPlacerBackground';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
+
+import { Placer } from './style';
 
 export function BlockPlacer() {
   const {
     player,
+    isValidPlace,
     newZone: { startCoords, endCoords },
   } = useTypeSelector((state) => state.game);
 
@@ -21,26 +25,22 @@ export function BlockPlacer() {
 
   const color = COLORS[player];
 
+  const background = getPlacerBackground(player, isValidPlace);
+
   return (
-    <div
+    <Placer
       style={{
-        position: 'absolute',
         left,
         top,
         width,
         height,
-        transition: 'all 0.03s',
-        background: player === 'first' ? 'rgba(193,43,43,0.2)' : 'rgba(48,47,175,0.2)',
-        border: `2px solid ${color}`,
-        pointerEvents: 'none',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        background,
+        border: `2px ${isValidPlace ? 'solid' : 'dashed'} ${color}`,
       }}
     >
       <Typography fontWeight="bold" style={{ color }}>
         {square}
       </Typography>
-    </div>
+    </Placer>
   );
 }

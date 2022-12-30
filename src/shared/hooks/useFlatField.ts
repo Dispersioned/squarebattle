@@ -7,7 +7,7 @@ export function useFlatField(field: Field): FlatField {
     field.forEach((row, rowi) => {
       row.forEach((col, coli) => {
         x.push({
-          value: 0,
+          value: col,
           key: `${rowi}-${coli}`,
           coords: {
             x: coli,
