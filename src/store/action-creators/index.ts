@@ -1,5 +1,5 @@
-import * as defaultAC from './default';
+import * as gameAC from './game';
 
 export const actionCreators = {
-  ...defaultAC,
+  ...gameAC,
 };

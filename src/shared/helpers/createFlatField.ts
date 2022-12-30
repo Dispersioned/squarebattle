@@ -6,8 +6,12 @@ export function createFlatField(field: Field) {
   field.forEach((row, rowi) => {
     row.forEach((col, coli) => {
       flatField.push({
-        value: col,
+        value: 0,
         key: `${rowi}-${coli}`,
+        coords: {
+          x: coli,
+          y: rowi,
+        },
       });
     });
   });

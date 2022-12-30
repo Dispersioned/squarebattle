@@ -1,20 +1,30 @@
+import { Typography } from '@mui/material';
+import { Cell } from 'component/cell';
 import { createFlatField } from 'shared/helpers/createFlatField';
 import { useTypeSelector } from 'shared/hooks/redux';
+import { useAction } from 'shared/hooks/useAction';
 
-import { Cell, Container, FieldContainer } from './style';
+import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const { field } = useTypeSelector((state) => state.game);
-  const width = field.length;
-  const height = field[0].length;
+  const { field, isPlacing } = useTypeSelector((state) => state.game);
+  const rows = field.length;
+  const cols = field[0].length;
 
   const flatField = createFlatField(field);
 
+  const { onLeaveField } = useAction();
+
+  const onMouseLeaveField = () => {
+    if (isPlacing) onLeaveField();
+  };
+
   return (
     <Container>
-      <FieldContainer width={width} height={height}>
+      <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
+      <FieldContainer rows={rows} cols={cols} onMouseLeave={onMouseLeaveField}>
         {flatField.map((cell) => (
-          <Cell key={cell.key} />
+          <Cell key={cell.key} coords={cell.coords} />
         ))}
       </FieldContainer>
     </Container>
