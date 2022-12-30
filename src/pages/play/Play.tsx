@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import { BlockPlacer } from 'component/block-placer';
 import { Cell } from 'component/cell';
+import { PlacedBlocks } from 'component/placed-blocks';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { getFieldSize } from 'shared/helpers/getFieldSize';
 import { useTypeSelector } from 'shared/hooks/redux';
@@ -36,6 +37,7 @@ export function Play() {
         onMouseUp={onEndPlacement}
         onMouseMove={onHover}
       >
+        <PlacedBlocks />
         {isPlacing && <BlockPlacer />}
         {flatField.map((cell) => (
           <Cell key={cell.key} coords={cell.coords} />

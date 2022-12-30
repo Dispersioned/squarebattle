@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import { CELL_SIZE } from 'shared/config';
+import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 
 export function BlockPlacer() {
@@ -12,19 +13,23 @@ export function BlockPlacer() {
     return null;
   }
 
-  const [lx, rx] = [Math.min(startCoords.x, endCoords.x), Math.max(startCoords.x, endCoords.x)];
-  const [ly, ry] = [Math.min(startCoords.y, endCoords.y), Math.max(startCoords.y, endCoords.y)];
-
-  const square = (rx - lx + 1) * (ry - ly + 1);
+  const {
+    style: { left, top, width, height },
+    lx,
+    rx,
+    ly,
+    ry,
+    square,
+  } = getPosition(startCoords, endCoords);
 
   return (
     <div
       style={{
         position: 'absolute',
-        left: lx * CELL_SIZE,
-        top: ly * CELL_SIZE,
-        width: (rx - lx + 1) * CELL_SIZE,
-        height: (ry - ly + 1) * CELL_SIZE,
+        left,
+        top,
+        width,
+        height,
         transition: 'all 0.03s',
         background: 'rgba(255,255,255,.5)',
         border: '2px solid rgba(0,0,0,0.7)',

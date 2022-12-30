@@ -72,6 +72,8 @@
     "no-unused-vars": "warn",
     // Breaks some features on Next.js & MUI
     "react/jsx-props-no-spreading": "warn",
+    // allow in string composed keys
+    "react/no-array-index-key": "warn",
 
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "import/extensions": [

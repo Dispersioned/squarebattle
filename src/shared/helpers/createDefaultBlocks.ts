@@ -21,12 +21,12 @@ export function createDefaultBlocks(field: Field) {
   blocks.push({
     player: 'second',
     start: {
-      x: rows,
-      y: cols,
+      x: cols - 1,
+      y: rows - 1,
     },
     end: {
-      x: rows,
-      y: cols,
+      x: cols - 1,
+      y: rows - 1,
     },
   });
 
