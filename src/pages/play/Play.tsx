@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { BlockPlacer } from 'component/block-placer';
 import { Cell } from 'component/cell';
 import { PlacedBlocks } from 'component/placed-blocks';
+import { useEffect } from 'react';
 import { getFieldSize } from 'shared/helpers/getFieldSize';
 import { useTypeSelector } from 'shared/hooks/redux';
 import { useAction } from 'shared/hooks/useAction';
@@ -14,7 +15,7 @@ export function Play() {
   const flatField = useFlatField(field);
   const { rows, cols } = getFieldSize(field);
 
-  const { onLeaveField, onHoverWhilePlacing, onStartPlacement, onEndPlacement } = useAction();
+  const { onLeaveField, onHoverWhilePlacing, onStartPlacement, onEndPlacement, onCancelPlacement } = useAction();
 
   const onMouseLeaveField = () => {
     onLeaveField();
@@ -24,8 +25,17 @@ export function Play() {
     onHoverWhilePlacing(e);
   };
 
+  useEffect(() => {
+    const escapeListener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancelPlacement();
+    };
+    document.addEventListener('keydown', escapeListener);
+    return () => document.removeEventListener('keydown', escapeListener);
+  }, []);
+
   return (
     <Container>
+      <Typography>Press ESC to cancel placement</Typography>
       <Typography>Player turn: {player}</Typography>
       <Typography>Is placing? {isPlacing ? 'true' : 'false'}</Typography>
       <FieldContainer

@@ -13,15 +13,15 @@ export const onStartPlacement =
     dispatch(gameSlice.actions.startPlacement(coords));
   };
 
+export const onCancelPlacement = (): AC => (dispatch, getState) => {
+  const state = getState();
+  if (state.game.isPlacing) dispatch(gameSlice.actions.endPlacement());
+};
+
 export const onEndPlacement =
   (e: React.MouseEvent<HTMLDivElement, MouseEvent>): AC =>
   (dispatch, getState) => {
-    const coords = getCellCoords(e);
-    if (!coords) return;
-
     const state = getState();
-    dispatch(gameSlice.actions.endPlacement(coords));
-
     const { startCoords, endCoords } = state.game.newZone;
     if (!startCoords || !endCoords) return;
 
@@ -33,6 +33,7 @@ export const onEndPlacement =
       })
     );
     dispatch(gameSlice.actions.changePlayer(state.game.player === 'first' ? 'second' : 'first'));
+    dispatch(gameSlice.actions.endPlacement());
   };
 
 export const onHoverWhilePlacing =
@@ -52,5 +53,5 @@ export const onHoverWhilePlacing =
 
 export const onLeaveField = (): AC => (dispatch, getState) => {
   const state = getState();
-  if (state.game.isPlacing) dispatch(gameSlice.actions.onLeaveField());
+  if (state.game.isPlacing) dispatch(gameSlice.actions.endPlacement());
 };
