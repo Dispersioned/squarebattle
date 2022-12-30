@@ -50,6 +50,9 @@ export const gameSlice = createSlice({
       state.newZone.startCoords = null;
       state.newZone.endCoords = null;
     },
+    createBlock(state, action: PayloadAction<Block>) {
+      state.blocks.push(action.payload);
+    },
     changePlayer(state, action: PayloadAction<Player>) {
       state.player = action.payload;
     },

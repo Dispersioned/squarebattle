@@ -21,6 +21,17 @@ export const onEndPlacement =
 
     const state = getState();
     dispatch(gameSlice.actions.endPlacement(coords));
+
+    const { startCoords, endCoords } = state.game.newZone;
+    if (!startCoords || !endCoords) return;
+
+    dispatch(
+      gameSlice.actions.createBlock({
+        player: state.game.player,
+        start: startCoords,
+        end: endCoords,
+      })
+    );
     dispatch(gameSlice.actions.changePlayer(state.game.player === 'first' ? 'second' : 'first'));
   };
 

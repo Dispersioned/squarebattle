@@ -45,7 +45,9 @@ export function PlacedBlocks() {
               alignItems: 'center',
             }}
           >
-            <Typography style={{ color }}>{data.square}</Typography>
+            <Typography fontWeight="bold" style={{ color }}>
+              {data.square}
+            </Typography>
           </div>
         );
       })}

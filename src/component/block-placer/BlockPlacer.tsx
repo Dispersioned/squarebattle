@@ -34,7 +34,7 @@ export function BlockPlacer() {
         alignItems: 'center',
       }}
     >
-      <Typography>{square}</Typography>
+      <Typography fontWeight="bold">{square}</Typography>
     </div>
   );
 }
