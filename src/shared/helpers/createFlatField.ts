@@ -1,6 +1,6 @@
 import { Field, FlatField } from 'shared/types';
 
-export function useFlatField(field: Field) {
+export function createFlatField(field: Field) {
   const flatField: FlatField = [];
 
   field.forEach((row, rowi) => {

@@ -1,5 +1,5 @@
+import { createFlatField } from 'shared/helpers/createFlatField';
 import { useTypeSelector } from 'shared/hooks/redux';
-import { useFlatField } from 'shared/hooks/useFlatField';
 
 import { Cell, Container, FieldContainer } from './style';
 
@@ -8,7 +8,7 @@ export function Play() {
   const width = field.length;
   const height = field[0].length;
 
-  const flatField = useFlatField(field);
+  const flatField = createFlatField(field);
 
   return (
     <Container>
