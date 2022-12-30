@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { COLORS } from 'shared/config';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 
@@ -18,7 +19,7 @@ export function BlockPlacer() {
     square,
   } = getPosition(startCoords, endCoords);
 
-  const color = player === 'first' ? '#a32c1f' : '#27369c';
+  const color = COLORS[player];
 
   return (
     <div
@@ -29,7 +30,7 @@ export function BlockPlacer() {
         width,
         height,
         transition: 'all 0.03s',
-        background: 'rgba(255,255,255,.5)',
+        background: player === 'first' ? 'rgba(193,43,43,0.2)' : 'rgba(48,47,175,0.2)',
         border: `2px solid ${color}`,
         pointerEvents: 'none',
         display: 'flex',

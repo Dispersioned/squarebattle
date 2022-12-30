@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { COLORS } from 'shared/config';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 
@@ -27,7 +28,7 @@ export function PlacedBlocks() {
       {blockData.map((data, i) => {
         const { left, top, width, height } = data.style;
 
-        const color = data.player === 'first' ? '#de2a16' : '#364acf';
+        const color = COLORS[data.player];
 
         return (
           <Block
