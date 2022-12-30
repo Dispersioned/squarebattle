@@ -7,7 +7,7 @@ type CellProps = {
   coords: Coords;
 };
 
-export function Cell({ coords }: CellProps) {
+function Cell({ coords }: CellProps) {
   return <CellContainer data-x={coords.x} data-y={coords.y} />;
 }
 

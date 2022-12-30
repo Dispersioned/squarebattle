@@ -19,5 +19,5 @@ export function useFlatField(field: Field): FlatField {
     return x;
   }, [field]);
 
-  return useMemo(() => flatField, [field]);
+  return flatField;
 }
