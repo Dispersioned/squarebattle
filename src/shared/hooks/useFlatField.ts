@@ -1,6 +1,7 @@
+import { useMemo } from 'react';
 import { Field, FlatField } from 'shared/types';
 
-export function createFlatField(field: Field) {
+export function useFlatField(field: Field) {
   const flatField: FlatField = [];
 
   field.forEach((row, rowi) => {
@@ -16,5 +17,5 @@ export function createFlatField(field: Field) {
     });
   });
 
-  return flatField;
+  return useMemo(() => flatField, [field]);
 }
