@@ -13,12 +13,10 @@ export function useCellHovered(cellCoords: Coords) {
       return false;
     }
 
-    return (
-      startCoords?.x <= cellCoords.x &&
-      cellCoords.x <= endCoords?.x &&
-      startCoords?.y <= cellCoords.y &&
-      cellCoords.y <= endCoords?.y
-    );
+    const [lx, rx] = [Math.min(startCoords.x, endCoords.x), Math.max(startCoords.x, endCoords.x)];
+    const [ly, ry] = [Math.min(startCoords.x, endCoords.y), Math.max(startCoords.x, endCoords.y)];
+
+    return lx <= cellCoords.x && cellCoords.x <= rx && ly <= cellCoords.y && cellCoords.y <= ry;
   }, [startCoords, endCoords, cellCoords]);
 
   return { isHovering };
