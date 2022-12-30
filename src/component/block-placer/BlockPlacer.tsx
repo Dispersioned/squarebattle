@@ -4,6 +4,7 @@ import { useTypeSelector } from 'shared/hooks/redux';
 
 export function BlockPlacer() {
   const {
+    player,
     newZone: { startCoords, endCoords },
   } = useTypeSelector((state) => state.game);
 
@@ -17,6 +18,8 @@ export function BlockPlacer() {
     square,
   } = getPosition(startCoords, endCoords);
 
+  const color = player === 'first' ? '#a32c1f' : '#27369c';
+
   return (
     <div
       style={{
@@ -27,14 +30,16 @@ export function BlockPlacer() {
         height,
         transition: 'all 0.03s',
         background: 'rgba(255,255,255,.5)',
-        border: '2px solid rgba(0,0,0,0.7)',
+        border: `2px solid ${color}`,
         pointerEvents: 'none',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
-      <Typography fontWeight="bold">{square}</Typography>
+      <Typography fontWeight="bold" style={{ color }}>
+        {square}
+      </Typography>
     </div>
   );
 }

@@ -2,6 +2,8 @@ import { Typography } from '@mui/material';
 import { getPosition } from 'shared/helpers/getPosition';
 import { useTypeSelector } from 'shared/hooks/redux';
 
+import { Block } from './style';
+
 export function PlacedBlocks() {
   const { blocks } = useTypeSelector((state) => state.game);
 
@@ -28,27 +30,20 @@ export function PlacedBlocks() {
         const color = data.player === 'first' ? '#de2a16' : '#364acf';
 
         return (
-          <div
+          <Block
             key={`${data.player}-${i}`}
             style={{
-              position: 'absolute',
               left,
               top,
               width,
               height,
-              transition: 'all 0.03s',
-              background: 'rgba(255,255,255,.5)',
               border: `2px solid ${color}`,
-              pointerEvents: 'none',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
             }}
           >
             <Typography fontWeight="bold" style={{ color }}>
               {data.square}
             </Typography>
-          </div>
+          </Block>
         );
       })}
     </div>
