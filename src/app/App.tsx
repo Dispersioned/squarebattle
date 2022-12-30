@@ -1,5 +1,12 @@
+import { HashRouter } from 'react-router-dom';
+
+import { AppRouter } from './router/AppRouter';
 import './styles/composed.css';
 
 export function App() {
-  return <div>app</div>;
+  return (
+    <HashRouter>
+      <AppRouter />
+    </HashRouter>
+  );
 }
