@@ -62,9 +62,6 @@ export const onHoverWhilePlacing =
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
 
-export const onLeaveField = (): AC => (dispatch, getState) => {
-  const state = getState();
-
-  if (state.game.isPlacing) return;
+export const onLeaveField = (): AC => (dispatch) => {
   dispatch(gameSlice.actions.endPlacement());
 };

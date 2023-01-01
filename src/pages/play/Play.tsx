@@ -27,12 +27,11 @@ export function Play() {
   }, [onCancelPlacement]);
 
   return (
-    <Container>
+    <Container onMouseUp={onLeaveField}>
       <Info />
       <FieldContainer
         rows={rows}
         cols={cols}
-        onMouseLeave={onLeaveField}
         onMouseDown={onStartPlacement}
         onMouseUp={onEndPlacement}
         onMouseMove={onHoverWhilePlacing}
