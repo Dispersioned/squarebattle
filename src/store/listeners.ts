@@ -1,7 +1,7 @@
 import { TypedStartListening, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import { getPosition } from 'shared/helpers/getPosition';
+import { isTurnReal } from 'shared/helpers/isTurnReal';
 import { validate } from 'shared/helpers/validate';
-import { validateWinner } from 'shared/helpers/validateWinner';
 import { AppDispatch, RootState } from 'store';
 
 import { gameSlice } from './slices/gameSlice';
@@ -37,11 +37,16 @@ startAppListening({
 
 startAppListening({
   actionCreator: gameSlice.actions.setDices,
-  effect: (_action, { getState, dispatch }) => {
+  effect: (_action, { getOriginalState, getState, dispatch }) => {
     const {
       game: { field, dices },
     } = getState();
 
-    validateWinner(field, dices);
+    const {
+      game: { player },
+    } = getOriginalState();
+
+    if (isTurnReal(field, dices)) return;
+    dispatch(gameSlice.actions.setWinner(player));
   },
 });

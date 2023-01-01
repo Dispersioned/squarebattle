@@ -10,17 +10,16 @@ function getSidesVariants(square: number) {
   return variants;
 }
 
-export function validateWinner(field: Field, dices: Dices) {
+export function isTurnReal(field: Field, dices: Dices) {
   const square = dices[0] * dices[1];
   const variants = getSidesVariants(square);
 
   const { rows, cols } = getFieldSize(field);
 
+  let canBePlaced = false;
   findVariant: for (const [x, y] of variants) {
-    let canBePlaced = false;
-    if (x > rows || y > cols) {
-      // console.warn('with [x,y]', [x, y]);
-      // console.log('not enough field space');
+    if (y > cols || x > rows) {
+      // console.warn('not enough field space with [x,y]', [x, y]);
       continue;
     }
     // console.warn('[x,y]', [x, y]);
@@ -30,16 +29,23 @@ export function validateWinner(field: Field, dices: Dices) {
 
       // console.log('rows,cols,y,cols-y', rows, cols, y, cols - y);
       findEnoughFreeWidth: for (let coli = 0; coli <= cols - y; coli++) {
-        for (let k = coli; k <= coli + y; k++) {
+        // console.log('coli, coli+y-1', coli, coli + y - 1);
+        for (let k = coli; k <= coli + y - 1; k++) {
+          // console.log('field[rowi][k]', field[rowi][k]);
           if (field[rowi][k] !== 0) {
-            console.log('not enough width');
+            // console.log('not enough width');
             continue findEnoughFreeWidth;
           }
         }
 
-        for (let k = rowi; k <= rowi + rows - y; k++) {
-          for (let l = rowi; l <= rowi + x; l++) {
-            if (field[l][k] !== 0) {
+        const left = coli;
+        const right = coli + y - 1;
+
+        // console.log('rowi, rowi+x-1', rowi, rowi + x - 1);
+        for (let k = rowi; k <= rowi + x - 1; k++) {
+          // console.log('field[k]', field[k]);
+          for (let l = left; l <= right; l++) {
+            if (field[k][l] !== 0) {
               // console.log('not enough height');
               continue findEnoughFreeWidth;
             }
@@ -53,5 +59,5 @@ export function validateWinner(field: Field, dices: Dices) {
     }
   }
 
-  return false;
+  return canBePlaced;
 }

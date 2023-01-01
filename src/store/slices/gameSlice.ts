@@ -11,6 +11,7 @@ interface InitialState {
   isValidPlace: boolean;
   dices: Dices;
   player: Player;
+  winner: Player | null;
   blocks: Block[];
   newZone: {
     startCoords: Coords | null;
@@ -27,6 +28,7 @@ const initialState: InitialState = {
   isValidPlace: false,
   dices: getRandomDice(),
   player: 'first',
+  winner: null,
   blocks,
   newZone: {
     startCoords: null,
@@ -72,6 +74,9 @@ export const gameSlice = createSlice({
     },
     setDices(state, action: PayloadAction<Dices>) {
       state.dices = action.payload;
+    },
+    setWinner(state, action: PayloadAction<Player>) {
+      state.winner = action.payload;
     },
   },
 });

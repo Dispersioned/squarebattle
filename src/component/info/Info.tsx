@@ -5,7 +5,7 @@ import { useTypeSelector } from 'shared/hooks/redux';
 import { Dice, UIDices, UIInfo } from './style';
 
 export function Info() {
-  const { player, dices } = useTypeSelector((state) => state.game);
+  const { player, dices, winner } = useTypeSelector((state) => state.game);
 
   return (
     <UIInfo>
@@ -18,6 +18,12 @@ export function Info() {
         Turn:
         <div style={{ background: COLORS[player], width: 17, height: 17 }} />
       </Typography>
+      {winner && (
+        <Typography component="div" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          Player
+          <div style={{ background: COLORS[player], width: 17, height: 17 }} /> won!
+        </Typography>
+      )}
     </UIInfo>
   );
 }
