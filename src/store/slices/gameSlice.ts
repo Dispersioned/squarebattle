@@ -3,13 +3,13 @@ import { initDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
 import { getPosition } from 'shared/helpers/getPosition';
 import { getRandomDice } from 'shared/helpers/getRandomDice';
-import { Block, Coords, Player } from 'shared/types';
+import { Block, Coords, Dices, Player } from 'shared/types';
 
 interface InitialState {
   field: number[][];
   isPlacing: boolean;
   isValidPlace: boolean;
-  dices: [number, number];
+  dices: Dices;
   player: Player;
   blocks: Block[];
   newZone: {
@@ -69,6 +69,9 @@ export const gameSlice = createSlice({
     },
     setValidity(state, action: PayloadAction<boolean>) {
       state.isValidPlace = action.payload;
+    },
+    setDices(state, action: PayloadAction<Dices>) {
+      state.dices = action.payload;
     },
   },
 });

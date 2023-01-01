@@ -1,6 +1,7 @@
 import React from 'react';
 import { getCellCoords } from 'shared/helpers/getCellCoords';
 import { getPosition } from 'shared/helpers/getPosition';
+import { getRandomDice } from 'shared/helpers/getRandomDice';
 import { validate } from 'shared/helpers/validate';
 import { gameSlice } from 'store/slices/gameSlice';
 
@@ -15,12 +16,12 @@ export const onStartPlacement =
     dispatch(gameSlice.actions.startPlacement(coords));
 
     const {
-      game: { field, player },
+      game: { field, player, dices },
     } = getState();
 
     // validate first 1x1 block
     const { indexes } = getPosition(coords, coords);
-    dispatch(gameSlice.actions.setValidity(validate(field, indexes, player)));
+    dispatch(gameSlice.actions.setValidity(validate({ field, indexes, player, dices })));
   };
 
 export const onCancelPlacement = (): AC => (dispatch, getState) => {
@@ -32,7 +33,6 @@ export const onEndPlacement = (): AC => async (dispatch, getState) => {
   const {
     game: {
       isValidPlace,
-
       player,
       newZone: { startCoords, endCoords },
     },
@@ -52,6 +52,7 @@ export const onEndPlacement = (): AC => async (dispatch, getState) => {
     })
   );
   dispatch(gameSlice.actions.changePlayer(player === 'first' ? 'second' : 'first'));
+  dispatch(gameSlice.actions.setDices(getRandomDice()));
   dispatch(gameSlice.actions.endPlacement());
 };
 
@@ -66,6 +67,7 @@ export const onHoverWhilePlacing =
         field,
         isPlacing,
         player,
+        dices,
         newZone: { startCoords, endCoords },
       },
     } = getState();
@@ -73,7 +75,7 @@ export const onHoverWhilePlacing =
     if (coords.x === endCoords.x && coords.y === endCoords.y) return;
 
     const { indexes } = getPosition(startCoords, coords);
-    dispatch(gameSlice.actions.setValidity(validate(field, indexes, player)));
+    dispatch(gameSlice.actions.setValidity(validate({ field, indexes, player, dices })));
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
 

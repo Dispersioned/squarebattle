@@ -23,3 +23,4 @@ export type Indexes = {
   ly: number;
   ry: number;
 };
+export type Dices = [number, number];

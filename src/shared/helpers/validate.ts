@@ -1,4 +1,13 @@
-import { Field, Indexes, Player } from 'shared/types';
+import { Dices, Field, Indexes, Player } from 'shared/types';
+
+function validateSize(indexes: Indexes, dices: Dices) {
+  const { lx, rx, ly, ry } = indexes;
+
+  const size = (rx - lx + 1) * (ry - ly + 1);
+  const sizeNeeded = dices[0] * dices[1];
+
+  return size === sizeNeeded;
+}
 
 function validateOverlap(field: Field, indexes: Indexes) {
   const { lx, rx, ly, ry } = indexes;
@@ -34,6 +43,17 @@ function validateConnectedTerritory(field: Field, indexes: Indexes, player: Play
   return false;
 }
 
-export function validate(field: Field, indexes: Indexes, player: Player) {
-  return validateOverlap(field, indexes) && validateConnectedTerritory(field, indexes, player);
+interface ValidateProps {
+  field: Field;
+  indexes: Indexes;
+  player: Player;
+  dices: Dices;
+}
+
+export function validate({ field, indexes, player, dices }: ValidateProps) {
+  return (
+    validateSize(indexes, dices) &&
+    validateOverlap(field, indexes) &&
+    validateConnectedTerritory(field, indexes, player)
+  );
 }
