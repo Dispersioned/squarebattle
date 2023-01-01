@@ -11,7 +11,7 @@ import { useFlatField } from 'shared/hooks/useFlatField';
 import { Container, FieldContainer } from './style';
 
 export function Play() {
-  const { field, isPlacing } = useTypeSelector((state) => state.game);
+  const { field, isPlacing, winner } = useTypeSelector((state) => state.game);
 
   const flatField = useFlatField(field);
   const { rows, cols } = getFieldSize(field);
@@ -30,6 +30,7 @@ export function Play() {
     <Container onMouseUp={onLeaveField}>
       <Info />
       <FieldContainer
+        style={{ pointerEvents: winner ? 'none' : 'all', cursor: winner ? 'default' : 'pointer' }}
         rows={rows}
         cols={cols}
         onMouseDown={onStartPlacement}
