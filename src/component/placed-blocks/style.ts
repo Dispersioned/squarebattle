@@ -7,7 +7,7 @@ export const CellContainer = styled('div')`
 export const Block = styled('div')`
   position: absolute;
   transition: all 0.03s;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 1);
   pointer-events: none;
   display: flex;
   justify-content: center;
