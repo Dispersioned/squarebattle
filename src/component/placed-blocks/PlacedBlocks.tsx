@@ -41,7 +41,7 @@ export function PlacedBlocks() {
               border: `2px solid ${color}`,
             }}
           >
-            <Typography fontWeight="bold" style={{ color }}>
+            <Typography fontWeight="bold" style={{ color, transform: `scale(${1 + data.square / 100 / 2})` }}>
               {data.square}
             </Typography>
           </Block>

@@ -38,7 +38,7 @@ export function BlockPlacer() {
         border: `2px ${isValidPlace ? 'solid' : 'dashed'} ${color}`,
       }}
     >
-      <Typography fontWeight="bold" style={{ color }}>
+      <Typography fontWeight="bold" style={{ color, transform: `scale(${1 + square / 100 / 2})` }}>
         {square}
       </Typography>
     </Placer>
