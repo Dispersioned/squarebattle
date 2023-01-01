@@ -11,7 +11,6 @@ function validateOverlap(field: Field, indexes: Indexes) {
 }
 
 function validateConnectedTerritory(field: Field, indexes: Indexes, player: Player) {
-  let cellsNearby = 0;
   const x = player === 'first' ? 1 : 2;
 
   const { lx, rx, ly, ry } = indexes;
@@ -24,16 +23,15 @@ function validateConnectedTerritory(field: Field, indexes: Indexes, player: Play
   };
 
   for (let i = lx; i <= rx; i++) {
-    if (freeSpace.top && field[ly - 1][i] === x) cellsNearby++;
-    if (freeSpace.bottom && field[ry + 1][i] === x) cellsNearby++;
+    if (freeSpace.top && field[ly - 1][i] === x) return true;
+    if (freeSpace.bottom && field[ry + 1][i] === x) return true;
   }
 
   for (let j = ly; j <= ry; j++) {
-    if (freeSpace.left && field[j][lx - 1] === x) cellsNearby++;
-    if (freeSpace.right && field[j][rx + 1] === x) cellsNearby++;
+    if (freeSpace.left && field[j][lx - 1] === x) return true;
+    if (freeSpace.right && field[j][rx + 1] === x) return true;
   }
-
-  return cellsNearby > 0;
+  return false;
 }
 
 export function validate(field: Field, indexes: Indexes, player: Player) {
