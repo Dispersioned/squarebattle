@@ -2,12 +2,14 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { initDefaultBlocks } from 'shared/helpers/createDefaultBlocks';
 import { createField } from 'shared/helpers/createField';
 import { getPosition } from 'shared/helpers/getPosition';
+import { getRandomDice } from 'shared/helpers/getRandomDice';
 import { Block, Coords, Player } from 'shared/types';
 
 interface InitialState {
   field: number[][];
   isPlacing: boolean;
   isValidPlace: boolean;
+  dices: [number, number];
   player: Player;
   blocks: Block[];
   newZone: {
@@ -23,6 +25,7 @@ const initialState: InitialState = {
   field: initedField,
   isPlacing: false,
   isValidPlace: false,
+  dices: getRandomDice(),
   player: 'first',
   blocks,
   newZone: {

@@ -2,14 +2,18 @@ import { Typography } from '@mui/material';
 import { COLORS } from 'shared/config';
 import { useTypeSelector } from 'shared/hooks/redux';
 
-import { UIInfo } from './style';
+import { Dice, UIDices, UIInfo } from './style';
 
 export function Info() {
-  const { player } = useTypeSelector((state) => state.game);
+  const { player, dices } = useTypeSelector((state) => state.game);
 
   return (
     <UIInfo>
       <Typography>Press ESC to cancel placement</Typography>
+      <UIDices>
+        <Dice>{dices[0]}</Dice>
+        <Dice>{dices[1]}</Dice>
+      </UIDices>
       <Typography component="div" display="flex" alignItems="center" gap={1}>
         Turn:
         <div style={{ background: COLORS[player], width: 17, height: 17 }} />
