@@ -74,6 +74,7 @@ export const onHoverWhilePlacing =
       },
     } = getState();
     if (!isPlacing || !startCoords || !endCoords) return;
+    if (coords.x === endCoords.x && coords.y === endCoords.y) return;
 
     const { indexes } = getPosition(startCoords, coords);
     if (!validate(field, indexes, player)) {
@@ -81,8 +82,6 @@ export const onHoverWhilePlacing =
     } else {
       dispatch(gameSlice.actions.setValidity(true));
     }
-
-    if (coords.x === endCoords.x && coords.y === endCoords.y) return;
 
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
