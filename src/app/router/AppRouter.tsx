@@ -5,9 +5,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 export function AppRouter() {
   return (
     <Routes>
-      <Route path="menu" element={<Menu />} />
+      {/* <Route path="menu" element={<Menu />} /> */}
       <Route path="play" element={<Play />} />
-      <Route path="*" element={<Navigate to="menu" />} />
+      <Route path="*" element={<Navigate to="play" />} />
     </Routes>
   );
 }

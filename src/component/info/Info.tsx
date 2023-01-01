@@ -9,6 +9,8 @@ export function Info() {
 
   return (
     <UIInfo>
+      <Typography>Blocks must be connected to the same color and have area equal to product of dices</Typography>
+      <Typography>First player who can&apos;t place blocks loses</Typography>
       <Typography>Press ESC to cancel placement</Typography>
       <UIDices>
         <Dice>{dices[0]}</Dice>
