@@ -1,8 +1,6 @@
 import React from 'react';
 import { getCellCoords } from 'shared/helpers/getCellCoords';
-import { getPosition } from 'shared/helpers/getPosition';
 import { getRandomDice } from 'shared/helpers/getRandomDice';
-import { validate } from 'shared/helpers/validate';
 import { gameSlice } from 'store/slices/gameSlice';
 
 import { AC } from '.';
@@ -12,16 +10,7 @@ export const onStartPlacement =
   (dispatch, getState) => {
     const coords = getCellCoords(e);
     if (!coords) return;
-
     dispatch(gameSlice.actions.startPlacement(coords));
-
-    const {
-      game: { field, player, dices },
-    } = getState();
-
-    // validate first 1x1 block
-    const { indexes } = getPosition(coords, coords);
-    dispatch(gameSlice.actions.setValidity(validate({ field, indexes, player, dices })));
   };
 
 export const onCancelPlacement = (): AC => (dispatch, getState) => {
@@ -39,7 +28,6 @@ export const onEndPlacement = (): AC => async (dispatch, getState) => {
   } = getState();
   if (!startCoords || !endCoords) return;
   if (!isValidPlace) {
-    dispatch(gameSlice.actions.setValidity(true));
     dispatch(gameSlice.actions.endPlacement());
     return;
   }
@@ -64,18 +52,13 @@ export const onHoverWhilePlacing =
 
     const {
       game: {
-        field,
         isPlacing,
-        player,
-        dices,
         newZone: { startCoords, endCoords },
       },
     } = getState();
     if (!isPlacing || !startCoords || !endCoords) return;
     if (coords.x === endCoords.x && coords.y === endCoords.y) return;
 
-    const { indexes } = getPosition(startCoords, coords);
-    dispatch(gameSlice.actions.setValidity(validate({ field, indexes, player, dices })));
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
 

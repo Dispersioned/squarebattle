@@ -14,7 +14,7 @@ export function BlockPlacer() {
   } = useTypeSelector((state) => state.game);
 
   if (!startCoords || !endCoords) {
-    console.log('placer not found');
+    console.error('placer not found');
     return null;
   }
 
