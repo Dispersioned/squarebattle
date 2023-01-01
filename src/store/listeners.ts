@@ -44,8 +44,6 @@ startAppListening({
 
     const playerWhoMadeTurn = player === 'first' ? 'second' : 'first';
 
-    console.log('playerWhoMadeTurn, player :>> ', playerWhoMadeTurn, player);
-
     if (isTurnReal({ field, player, dices })) return;
     dispatch(gameSlice.actions.setWinner(playerWhoMadeTurn));
   },
