@@ -53,6 +53,7 @@
     "import/no-unresolved": "error",
     "no-continue": "warn",
     "no-plusplus": "off",
+    "no-labels": "off",
 
     // Warn instead error for fast debugging
     "no-console": "warn",

@@ -1,6 +1,7 @@
 import { TypedStartListening, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import { getPosition } from 'shared/helpers/getPosition';
 import { validate } from 'shared/helpers/validate';
+import { validateWinner } from 'shared/helpers/validateWinner';
 import { AppDispatch, RootState } from 'store';
 
 import { gameSlice } from './slices/gameSlice';
@@ -31,5 +32,16 @@ startAppListening({
 
     const { indexes } = getPosition(startCoords, endCoords);
     dispatch(gameSlice.actions.setValidity(validate({ field, indexes, player, dices })));
+  },
+});
+
+startAppListening({
+  actionCreator: gameSlice.actions.setDices,
+  effect: (_action, { getState, dispatch }) => {
+    const {
+      game: { field, dices },
+    } = getState();
+
+    validateWinner(field, dices);
   },
 });
