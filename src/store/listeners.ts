@@ -37,16 +37,16 @@ startAppListening({
 
 startAppListening({
   actionCreator: gameSlice.actions.setDices,
-  effect: (_action, { getOriginalState, getState, dispatch }) => {
+  effect: (_action, { getState, dispatch }) => {
     const {
-      game: { field, dices },
+      game: { field, dices, player },
     } = getState();
 
-    const {
-      game: { player },
-    } = getOriginalState();
+    const playerWhoMadeTurn = player === 'first' ? 'second' : 'first';
 
-    if (isTurnReal(field, dices)) return;
-    dispatch(gameSlice.actions.setWinner(player));
+    console.log('playerWhoMadeTurn, player :>> ', playerWhoMadeTurn, player);
+
+    if (isTurnReal({ field, player, dices })) return;
+    dispatch(gameSlice.actions.setWinner(playerWhoMadeTurn));
   },
 });

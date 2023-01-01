@@ -21,7 +21,7 @@ export function Info() {
       {winner && (
         <Typography component="div" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
           Player
-          <div style={{ background: COLORS[player], width: 17, height: 17 }} /> won!
+          <div style={{ background: COLORS[winner], width: 17, height: 17 }} /> won!
         </Typography>
       )}
     </UIInfo>
