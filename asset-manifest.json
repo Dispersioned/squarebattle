@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/squarebattle/static/css/main.4a3e5550.css",
+    "main.js": "/squarebattle/static/js/main.3052dc92.js",
+    "index.html": "/squarebattle/index.html",
+    "main.4a3e5550.css.map": "/squarebattle/static/css/main.4a3e5550.css.map",
+    "main.3052dc92.js.map": "/squarebattle/static/js/main.3052dc92.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a3e5550.css",
+    "static/js/main.3052dc92.js"
+  ]
+}
