@@ -20,11 +20,7 @@ export const onStartPlacement =
 
     // validate first 1x1 block
     const { indexes } = getPosition(coords, coords);
-    if (!validate(field, indexes, player)) {
-      dispatch(gameSlice.actions.setValidity(false));
-    } else {
-      dispatch(gameSlice.actions.setValidity(true));
-    }
+    dispatch(gameSlice.actions.setValidity(validate(field, indexes, player)));
   };
 
 export const onCancelPlacement = (): AC => (dispatch, getState) => {
@@ -77,12 +73,7 @@ export const onHoverWhilePlacing =
     if (coords.x === endCoords.x && coords.y === endCoords.y) return;
 
     const { indexes } = getPosition(startCoords, coords);
-    if (!validate(field, indexes, player)) {
-      dispatch(gameSlice.actions.setValidity(false));
-    } else {
-      dispatch(gameSlice.actions.setValidity(true));
-    }
-
+    dispatch(gameSlice.actions.setValidity(validate(field, indexes, player)));
     dispatch(gameSlice.actions.onHoverWhilePlacing(coords));
   };
 

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Coords, ICell } from 'shared/types';
+import { ICell } from 'shared/types';
 
 import { CellContainer } from './style';
 
